@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'fail2ban', :type => :class do
   ['Debian'].each do |osfamily|
-    let(:facts) {{
+    let(:facts) { {
       :osfamily => osfamily,
     }}
 
@@ -25,7 +25,7 @@ describe 'fail2ban', :type => :class do
         end
 
         context 'when package latest' do
-          let(:params) {{
+          let(:params) { {
             :package_ensure => 'latest',
           }}
 
@@ -37,7 +37,7 @@ describe 'fail2ban', :type => :class do
         end
 
         context 'when package absent' do
-          let(:params) {{
+          let(:params) { {
             :package_ensure => 'absent',
             :service_ensure => 'stopped',
             :service_enable => false,
@@ -64,7 +64,7 @@ describe 'fail2ban', :type => :class do
         end
 
         context 'when package purged' do
-          let(:params) {{
+          let(:params) { {
             :package_ensure => 'purged',
             :service_ensure => 'stopped',
             :service_enable => false,
@@ -103,7 +103,7 @@ describe 'fail2ban', :type => :class do
         end
 
         context 'when source dir' do
-          let(:params) {{
+          let(:params) { {
             :config_dir_source => 'puppet:///modules/fail2ban/wheezy/etc/fail2ban',
           }}
 
@@ -121,7 +121,7 @@ describe 'fail2ban', :type => :class do
         end
 
         context 'when source dir purged' do
-          let(:params) {{
+          let(:params) { {
             :config_dir_purge  => true,
             :config_dir_source => 'puppet:///modules/fail2ban/wheezy/etc/fail2ban',
           }}
@@ -140,7 +140,7 @@ describe 'fail2ban', :type => :class do
         end
 
         context 'when source file' do
-          let(:params) {{
+          let(:params) { {
             :config_file_source => 'puppet:///modules/fail2ban/wheezy/etc/fail2ban/jail.conf',
           }}
 
@@ -155,7 +155,7 @@ describe 'fail2ban', :type => :class do
         end
 
         context 'when content string' do
-          let(:params) {{
+          let(:params) { {
             :config_file_string => '# THIS FILE IS MANAGED BY PUPPET',
           }}
 
@@ -170,7 +170,7 @@ describe 'fail2ban', :type => :class do
         end
 
         context 'when content template' do
-          let(:params) {{
+          let(:params) { {
             :config_file_template => 'fail2ban/wheezy/etc/fail2ban/jail.conf.erb',
           }}
 
@@ -185,7 +185,7 @@ describe 'fail2ban', :type => :class do
         end
 
         context 'when content template (custom)' do
-          let(:params) {{
+          let(:params) { {
             :config_file_template     => 'fail2ban/wheezy/etc/fail2ban/jail.conf.erb',
             :config_file_options_hash => {
               'key' => 'value',
@@ -214,7 +214,7 @@ describe 'fail2ban', :type => :class do
         end
 
         context 'when service stopped' do
-          let(:params) {{
+          let(:params) { {
             :service_ensure => 'stopped',
           }}
 

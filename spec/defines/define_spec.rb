@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'fail2ban::define', :type => :define do
   ['Debian'].each do |osfamily|
-    let(:facts) {{
+    let(:facts) { {
       :osfamily => osfamily,
     }}
     let(:pre_condition) { 'include fail2ban' }
@@ -10,7 +10,7 @@ describe 'fail2ban::define', :type => :define do
 
     context "on #{osfamily}" do
       context 'when source file' do
-        let(:params) {{
+        let(:params) { {
           :config_file_source => 'puppet:///modules/fail2ban/wheezy/etc/fail2ban/jail.conf',
         }}
 
@@ -25,7 +25,7 @@ describe 'fail2ban::define', :type => :define do
       end
 
       context 'when content string' do
-        let(:params) {{
+        let(:params) { {
           :config_file_string => '# THIS FILE IS MANAGED BY PUPPET',
         }}
 
@@ -40,7 +40,7 @@ describe 'fail2ban::define', :type => :define do
       end
 
       context 'when content template' do
-        let(:params) {{
+        let(:params) { {
           :config_file_template => 'fail2ban/wheezy/etc/fail2ban/jail.conf.erb',
         }}
 
@@ -55,7 +55,7 @@ describe 'fail2ban::define', :type => :define do
       end
 
       context 'when content template (custom)' do
-        let(:params) {{
+        let(:params) { {
           :config_file_template     => 'fail2ban/wheezy/etc/fail2ban/jail.conf.erb',
           :config_file_options_hash => {
             'key' => 'value',
