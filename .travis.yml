@@ -4,8 +4,8 @@ language: ruby
 cache: bundler
 bundler_args: --without system_tests
 before_install: rm Gemfile.lock || true
-script:
-- bundle exec rake $CHECK
+script: "bundle exec rake validate && bundle exec rake lint && bundle exec rake spec SPEC_OPTS='--format documentation'"
+#- bundle exec rake $CHECK
 matrix:
   fast_finish: true
   include:
