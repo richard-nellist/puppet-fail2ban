@@ -43,14 +43,18 @@ group :development do
 end
 
 group :system_tests do
-  gem 'beaker', *location_from_env('BEAKER_VERSION', []) if RUBY_VERSION >= '2.3.0'
-  gem 'beaker', *location_from_env('BEAKER_VERSION', ['< 3']) if RUBY_VERSION < '2.3.0'
-  gem 'beaker-rspec', *location_from_env('BEAKER_RSPEC_VERSION', ['>= 3.4'])
-  gem 'serverspec'
-  gem 'beaker-puppet_install_helper'
-  gem 'master_manipulator'
-  gem 'beaker-hostgenerator', *location_from_env('BEAKER_HOSTGENERATOR_VERSION', [])
-end
+  gem 'beaker', :require => false
+ +  if beaker_version = ENV['BEAKER_VERSION']
+ +    gem 'beaker', *location_for(beaker_version)
+ +  end
+ +  if beaker_rspec_version = ENV['BEAKER_RSPEC_VERSION']
+ +    gem 'beaker-rspec', *location_for(beaker_rspec_version)
+ +  else
+ +    gem 'beaker-rspec', :require => false
+ +  end
+    gem 'beaker-puppet_install_helper', :require => false		    gem 'beaker-puppet_install_helper', :require => false
+ -  gem 'serverspec',                   :require => false		
+ end
 
 if facterversion = ENV['FACTER_GEM_VERSION']
   gem 'facter', facterversion.to_s, :require => false, :groups => [:test]
